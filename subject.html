@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luminary Minds - Subjects</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #EEF2FF;
+            --text-main: #1F2937;
+            --text-muted: #6B7280;
+            --bg-body: #F9FAFB;
+            --bg-card: #FFFFFF;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05);
+            --radius-md: 16px;
+            --radius-lg: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Poppins', 'Hind Siliguri', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Mobile Container */
+        .app-container {
+            width: 100%;
+            max-width: 450px;
+            background-color: var(--bg-card);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.03);
+            overflow-x: hidden;
+        }
+
+        /* Header with Back Button */
+        .sub-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #F3F4F6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 18px;
+            transition: background 0.2s;
+        }
+
+        .back-btn:active {
+            background: #E5E7EB;
+        }
+
+        .page-title {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* Subject Grid Container */
+        .subject-container {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        /* Premium Subject Cards */
+        .subject-list-card {
+            background: var(--bg-card);
+            border: 1px solid #E5E7EB;
+            border-radius: var(--radius-md);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .subject-list-card:active {
+            transform: scale(0.98);
+            box-shadow: var(--shadow-md);
+        }
+
+        .subject-info-box {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .sub-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+
+        /* Distinct Soft Colors for Icons */
+        .sub-1 { background: #EFF6FF; color: #3B82F6; } /* বিজ্ঞান */
+        .sub-2 { background: #FEF2F2; color: #EF4444; } /* গণিত */
+        .sub-3 { background: #ECFDF5; color: #10B981; } /* বাংলা */
+        .sub-4 { background: #FDF4FF; color: #D946EF; } /* ইংরেজি */
+        .sub-5 { background: #FFF7ED; color: #F97316; } /* আইসিটি */
+
+        .sub-details h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .sub-details p {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .arrow-icon {
+            color: #D1D5DB;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <header class="sub-header">
+            <a href="practice.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <h1 class="page-title">বিষয় সমূহ</h1>
+        </header>
+
+        <div class="subject-container">
+            
+            <a href="chapter.html" class="subject-list-card">
+                <div class="subject-info-box">
+                    <div class="sub-icon sub-1">
+                        <i class="fa-solid fa-atom"></i>
+                    </div>
+                    <div class="sub-details">
+                        <h3>বিজ্ঞান</h3>
+                        <p>১২টি অধ্যায়</p>
+                    </div>
+                </div>
+                <div class="arrow-icon">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </a>
+
+            <a href="chapter.html" class="subject-list-card">
+                <div class="subject-info-box">
+                    <div class="sub-icon sub-2">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <div class="sub-details">
+                        <h3>গণিত</h3>
+                        <p>১৫টি অধ্যায়</p>
+                    </div>
+                </div>
+                <div class="arrow-icon">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </a>
+
+            <a href="chapter.html" class="subject-list-card">
+                <div class="subject-info-box">
+                    <div class="sub-icon sub-3">
+                        <i class="fa-solid fa-gopuram"></i>
+                    </div>
+                    <div class="sub-details">
+                        <h3>বাংলা</h3>
+                        <p>১০টি অধ্যায়</p>
+                    </div>
+                </div>
+                <div class="arrow-icon">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </a>
+
+            <a href="chapter.html" class="subject-list-card">
+                <div class="subject-info-box">
+                    <div class="sub-icon sub-4">
+                        <i class="fa-solid fa-language"></i>
+                    </div>
+                    <div class="sub-details">
+                        <h3>ইংরেজি</h3>
+                        <p>৮টি অধ্যায়</p>
+                    </div>
+                </div>
+                <div class="arrow-icon">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </a>
+
+            <a href="chapter.html" class="subject-list-card">
+                <div class="subject-info-box">
+                    <div class="sub-icon sub-5">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <div class="sub-details">
+                        <h3>আইসিটি (ICT)</h3>
+                        <p>৬টি অধ্যায়</p>
+                    </div>
+                </div>
+                <div class="arrow-icon">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
