@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luminary Minds - MCQ Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #EEF2FF;
+            --success: #10B981;
+            --text-main: #1F2937;
+            --text-muted: #6B7280;
+            --bg-body: #F9FAFB;
+            --bg-card: #FFFFFF;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05);
+            --radius-md: 16px;
+            --radius-lg: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Poppins', 'Hind Siliguri', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Mobile Container */
+        .app-container {
+            width: 100%;
+            max-width: 450px;
+            background-color: var(--bg-card);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.03);
+            padding-bottom: 90px; /* Space for bottom buttons */
+        }
+
+        /* Header */
+        .sub-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .back-btn, .close-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #F3F4F6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 18px;
+            transition: background 0.2s;
+        }
+
+        .back-btn:active, .close-btn:active {
+            background: #E5E7EB;
+        }
+
+        .page-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* Quiz Progress Area */
+        .quiz-top-info {
+            padding: 20px 20px 10px 20px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .question-counter {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .timer-badge {
+            background: #FEF2F2;
+            color: #EF4444;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 6px;
+            background: #F3F4F6;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 10px;
+            width: 100%; /* Shows 5 out of 5 question progress */
+            transition: width 0.3s ease;
+        }
+
+        /* Question Section */
+        .question-container {
+            padding: 20px;
+        }
+
+        .question-text {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        /* Options Grid */
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .option-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            border: 2px solid #E5E7EB;
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-card:active {
+            transform: scale(0.98);
+        }
+
+        /* Selected State for Option */
+        .option-card.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .option-card.selected .option-letter {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .option-letter {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #D1D5DB;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-muted);
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .option-text {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-main);
+            line-height: 1.3;
+        }
+
+        /* Fixed Bottom Action Container */
+        .bottom-action-container {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 16px 20px;
+            border-top: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.03);
+            z-index: 100;
+            display: flex;
+            gap: 12px;
+        }
+
+        /* Disabled Next Button for Last Question */
+        .next-btn {
+            display: none; /* Hide next button on the last question */
+        }
+
+        .submit-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px;
+            background: var(--success);
+            color: white;
+            text-decoration: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+            transition: opacity 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .submit-btn:active {
+            opacity: 0.9;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <header class="sub-header">
+            <a href="notes.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <h1 class="page-title">MCQ অনুশীলন</h1>
+            <a href="chapter.html" class="close-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </a>
+        </header>
+
+        <div class="quiz-top-info">
+            <div class="progress-header">
+                <span class="question-counter">প্রশ্ন ৫ / ৫</span>
+                <span class="timer-badge">
+                    <i class="fa-regular fa-clock"></i> ০১:১২
+                </span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill"></div>
+            </div>
+        </div>
+
+        <main class="question-container">
+            <h2 class="question-text">মানবদেহে ওজনের কত ভাগ পানি থাকে?</h2>
+            
+            <div class="options-list">
+                
+                <div class="option-card" onclick="selectOption(this)">
+                    <div class="option-letter">ক</div>
+                    <span class="option-text">৫০-৬০ ভাগ</span>
+                </div>
+
+                <div class="option-card selected" onclick="selectOption(this)">
+                    <div class="option-letter">খ</div>
+                    <span class="option-text">৬০-৭৫ ভাগ</span>
+                </div>
+
+                <div class="option-card" onclick="selectOption(this)">
+                    <div class="option-letter">গ</div>
+                    <span class="option-text">৭০-৮০ ভাগ</span>
+                </div>
+
+                <div class="option-card" onclick="selectOption(this)">
+                    <div class="option-letter">ঘ</div>
+                    <span class="option-text">৮০-৯০ ভাগ</span>
+                </div>
+
+            </div>
+        </main>
+
+        <div class="bottom-action-container">
+            <a href="result.html" class="submit-btn">
+                <i class="fa-solid fa-check-circle"></i> <span>সাবমিট করো</span>
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+        function selectOption(selectedElement) {
+            // Remove 'selected' class from all options
+            let options = document.querySelectorAll('.option-card');
+            options.forEach(option => {
+                option.classList.remove('selected');
+            });
+            // Add 'selected' class to the clicked option
+            selectedElement.classList.add('selected');
+        }
+    </script>
+</body>
+</html>
