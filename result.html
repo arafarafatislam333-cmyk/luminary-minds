@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luminary Minds - Quiz Result</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #EEF2FF;
+            --success: #10B981;
+            --success-light: #ECFDF5;
+            --danger: #EF4444;
+            --danger-light: #FEF2F2;
+            --warning: #F59E0B;
+            --warning-light: #FEF3C7;
+            --text-main: #1F2937;
+            --text-muted: #6B7280;
+            --bg-body: #F9FAFB;
+            --bg-card: #FFFFFF;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05);
+            --radius-md: 16px;
+            --radius-lg: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Poppins', 'Hind Siliguri', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Mobile Container */
+        .app-container {
+            width: 100%;
+            max-width: 450px;
+            background-color: var(--bg-card);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.03);
+            padding-bottom: 140px; /* Space for bottom buttons */
+        }
+
+        /* Header */
+        .sub-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .page-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* Result Top Section */
+        .result-header-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px 20px 20px;
+            text-align: center;
+        }
+
+        .trophy-icon {
+            font-size: 60px;
+            color: var(--warning);
+            margin-bottom: 16px;
+            filter: drop-shadow(0 4px 8px rgba(245, 158, 11, 0.2));
+            animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .performance-msg {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .performance-sub {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        /* Circular Score Chart */
+        .score-circle-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin-bottom: 10px;
+        }
+
+        .score-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(var(--success) 80%, #F3F4F6 0deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+        }
+
+        .score-inner {
+            width: 116px;
+            height: 116px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .score-percentage {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            padding: 0 20px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid #E5E7EB;
+            border-radius: var(--radius-md);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        /* Specific Stat Colors */
+        .stat-total .stat-icon { background: var(--primary-light); color: var(--primary); }
+        .stat-correct .stat-icon { background: var(--success-light); color: var(--success); }
+        .stat-wrong .stat-icon { background: var(--danger-light); color: var(--danger); }
+        .stat-score .stat-icon { background: var(--warning-light); color: var(--warning); }
+
+        .stat-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1.2;
+        }
+
+        .stat-text {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Bottom Action Buttons */
+        .bottom-action-container {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 16px 20px;
+            border-top: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.03);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-retry, .btn-home {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-retry {
+            background: var(--primary-light);
+            color: var(--primary);
+            border: 1px solid var(--primary-light);
+        }
+
+        .btn-retry:active {
+            background: #E0E7FF;
+        }
+
+        .btn-home {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+            border: none;
+        }
+
+        .btn-home:active {
+            opacity: 0.9;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <header class="sub-header">
+            <h1 class="page-title">কুইজ ফলাফল</h1>
+        </header>
+
+        <section class="result-header-area">
+            <i class="fa-solid fa-trophy trophy-icon"></i>
+            <h2 class="performance-msg">অসাধারণ পারফরম্যান্স!</h2>
+            <p class="performance-sub">তুমি খুব ভালো করেছ, এভাবে চালিয়ে যাও।</p>
+
+            <div class="score-circle-container">
+                <div class="score-circle">
+                    <div class="score-inner">
+                        <span class="score-percentage">৮০%</span>
+                        <span class="score-label">সঠিক হয়েছে</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="stats-grid">
+            
+            <div class="stat-card stat-total">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-list-ol"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-value">০৫</span>
+                    <span class="stat-text">মোট প্রশ্ন</span>
+                </div>
+            </div>
+
+            <div class="stat-card stat-score">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-value">২০</span>
+                    <span class="stat-text">প্রাপ্ত নম্বর</span>
+                </div>
+            </div>
+
+            <div class="stat-card stat-correct">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-value">০৪</span>
+                    <span class="stat-text">সঠিক উত্তর</span>
+                </div>
+            </div>
+
+            <div class="stat-card stat-wrong">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-value">০১</span>
+                    <span class="stat-text">ভুল উত্তর</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="bottom-action-container">
+            <a href="mcq.html" class="btn-retry">
+                <i class="fa-solid fa-rotate-right"></i>
+                <span>আবার চেষ্টা করো</span>
+            </a>
+            
+            <a href="index.html" class="btn-home">
+                <i class="fa-solid fa-house"></i>
+                <span>হোম পেজে ফিরে যান</span>
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>
